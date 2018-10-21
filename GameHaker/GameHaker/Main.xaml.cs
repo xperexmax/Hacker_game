@@ -38,6 +38,7 @@ namespace GameHaker
             MenuButtonsBackgroundBlur s = sender as MenuButtonsBackgroundBlur;
             listBut.Add(s);
             s.setBlurOptions(grid3, 30, this);
+
         }
 
         private void MenuButtonsBackgroundBlur_MouseUp(object sender, MouseButtonEventArgs e)

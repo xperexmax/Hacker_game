@@ -437,7 +437,7 @@
             <Grid.Effect>
                 <DropShadowEffect Color="#FF38F700" ShadowDepth="10" BlurRadius="20"/>
             </Grid.Effect>
-            <Label Content="HAKER" HorizontalAlignment="Center" Height="261" Margin="0" VerticalAlignment="Top" Width="597" FontFamily="HACKED" FontSize="250" Foreground="White"/>
+            <Label Content="HAKER" HorizontalAlignment="Center" Height="261" Margin="0,0,-239,0" VerticalAlignment="Top" Width="836" FontFamily="HACKED" FontSize="250" Foreground="White"/>
         </Grid>
         <Border BorderBrush="White" BorderThickness="1" Margin="0" IsHitTestVisible="True">
             <Border.Background>
@@ -451,7 +451,7 @@
 
             <MediaElement HorizontalAlignment="Center" Height="506" Margin="254,402,754,172" VerticalAlignment="Center" Width="912" Source="Resource/img/GameHaker 2018-10-20 11-36-06-395.mp4" Stretch="None" Loaded="MediaElement_Loaded" LoadedBehavior="Manual" Visibility="Hidden"/>
 
-            <Button x:Name="but" Content="Button" Click="Button_Click" Margin="147,51,1404,852" FontSize="24"/>
+            <Button x:Name="but" Content="Button" Click="Button_Click" Margin="147,51,0,0" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Height="286" Width="801"/>
             <StackPanel x:Name="stackPanel" Margin="-603,0,0,0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <local:MenuButtonsBackgroundBlur HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="-20,0,0,0" MouseUp="MenuButtonsBackgroundBlur_MouseUp" Text="OffBlur">
                     <i:Interaction.Behaviors>

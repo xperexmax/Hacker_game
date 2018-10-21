@@ -79,7 +79,7 @@
             <Button Content="Page2" Margin="5" Width="50" Height="50" Uid="Page2" Click="PageChange"/>
         </WrapPanel>
         <Frame x:Name="FrameObj" Source="/GameHaker;component/Resource/pages/Page1.xaml" NavigationUIVisibility="Hidden" Margin="0,0,0,364"/>
-        <Button x:Name="test" Content="Button" HorizontalAlignment="Left" Margin="432,102,0,0" VerticalAlignment="Top" Width="75" MouseMove="Button_MouseMove" Height="20" MouseDown="Button_MouseDown" MouseUp="Button_MouseUp" Click="test_Click"/>
+        <Button x:Name="test" Content="Button" HorizontalAlignment="Right" Margin="717,411,0,0" VerticalAlignment="Bottom" Width="75" MouseMove="Button_MouseMove" Height="20" MouseDown="Button_MouseDown" MouseUp="Button_MouseUp" Click="test_Click"/>
         <Grid Background="#6631E61F" VerticalAlignment="Bottom" Height="40">
             <local:TaskPanelBlock x:Name="MenuPysk" Margin="0,0,758,0" HorizontalAlignment="Left" Width="40"/>
             <local:TaskPanelBlock x:Name="testblock" Margin="80,0,0,0" Loaded="TaskPanelBlock_Loaded" HorizontalAlignment="Left" Width="40" NotifColor="White">
