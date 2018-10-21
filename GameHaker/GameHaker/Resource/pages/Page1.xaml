@@ -8,5 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
 
-    <Grid Margin="0,0,45,0"/>
+    <Grid Margin="0,0,45,0">
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="18" Margin="158,90,0,0" VerticalAlignment="Top" Width="19" Grid.Column="1"/>
+        <ListBox HorizontalAlignment="Left" Height="177" Margin="268,90,0,0" VerticalAlignment="Top" Width="221" Grid.Column="1"/>
+        <Button Content="Button" Margin="46,272,526,115" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+
+    </Grid>
 </Page>
