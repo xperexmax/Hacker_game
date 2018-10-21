@@ -52,7 +52,7 @@ namespace GameHaker
         public Position oldPos;
         private void Button_MouseMove(object sender, MouseEventArgs e)
         {
-            
+            throw new Exception("You are Govno!");
         }
 
         public struct Position

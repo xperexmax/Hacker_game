@@ -86,6 +86,6 @@
             <Rectangle HorizontalAlignment="Left" Margin="39,0,0,0" StrokeThickness="0" Width="1" Fill="White"/>
             <local:TaskPanelBlock x:Name="testblock_Copy" Margin="40,0,0,0" Loaded="TaskPanelBlock_Loaded" HorizontalAlignment="Left" Width="40"/>
         </Grid>
-        <Calendar HorizontalAlignment="Left" Margin="617,29,0,0" VerticalAlignment="Top"/>
+        <Calendar Margin="0,10,20,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
     </Grid>
 </Window>
