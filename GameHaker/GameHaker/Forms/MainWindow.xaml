@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GameHaker"
         xmlns:pages="clr-namespace:GameHaker.Resource.pages" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="GameHaker.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="451" Width="805" MouseMove="Window_MouseMove" WindowState="Maximized" Activated="Window_Activated" ResizeMode="NoResize" WindowStyle="None" Deactivated="Window_Deactivated">
+        Title="MainWindow" Height="451" Width="806" MouseMove="Window_MouseMove" WindowState="Maximized" Activated="Window_Activated" ResizeMode="NoResize" WindowStyle="None" Deactivated="Window_Deactivated">
     <Window.Resources>
         <Storyboard x:Key="OnLoaded1" AutoReverse="True" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(ee:BloomEffect.BaseIntensity)" Storyboard.TargetName="image">
@@ -79,12 +79,13 @@
             <Button Content="Page2" Margin="5" Width="50" Height="50" Uid="Page2" Click="PageChange"/>
         </WrapPanel>
         <Frame x:Name="FrameObj" Source="/GameHaker;component/Resource/pages/Page1.xaml" NavigationUIVisibility="Hidden" Margin="0,0,0,364"/>
-        <Button x:Name="test" Content="Button" HorizontalAlignment="Left" Margin="432,102,0,0" VerticalAlignment="Top" Width="75" MouseMove="Button_MouseMove" Height="20" MouseDown="Button_MouseDown" MouseUp="Button_MouseUp" Click="test_Click"/>
+        <Button x:Name="test" Content="Button" HorizontalAlignment="Left" Margin="432,29,0,0" VerticalAlignment="Top" Width="60" MouseMove="Button_MouseMove" Height="56" MouseDown="Button_MouseDown" MouseUp="Button_MouseUp" Click="test_Click" RenderTransformOrigin="0.5,0.5"/>
         <Grid Background="#6631E61F" VerticalAlignment="Bottom" Height="40">
             <local:TaskPanelBlock x:Name="MenuPysk" Margin="0,0,758,0" HorizontalAlignment="Left" Width="40"/>
             <local:TaskPanelBlock x:Name="testblock" Margin="80,0,0,0" Loaded="TaskPanelBlock_Loaded" HorizontalAlignment="Left" Width="40"/>
             <Rectangle HorizontalAlignment="Left" Margin="39,0,0,0" StrokeThickness="0" Width="1" Fill="White"/>
             <local:TaskPanelBlock x:Name="testblock_Copy" Margin="40,0,0,0" Loaded="TaskPanelBlock_Loaded" HorizontalAlignment="Left" Width="40"/>
         </Grid>
+        <Calendar HorizontalAlignment="Left" Margin="617,29,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
