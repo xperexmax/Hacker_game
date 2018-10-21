@@ -1,0 +1,14 @@
+﻿<Application x:Class="GameHaker.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GameHaker"
+             StartupUri="Main.xaml">
+    <Application.Resources>
+
+        <Style x:Key="GridStyle1" TargetType="{x:Type Grid}">
+            <Setter Property="Width" Value="33"/>
+            <Setter Property="Background" Value="#FFD43232"/>
+        </Style>
+
+    </Application.Resources>
+</Application>
