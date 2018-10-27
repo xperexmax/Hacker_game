@@ -4,142 +4,322 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameHaker"
-        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="GameHaker.Main"
+        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Name="window" x:Class="GameHaker.Main"
         mc:Ignorable="d"
-        Title="Main" Height="1080" Width="1920" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized">
+        Title="Main" Height="1080" Width="1920" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" KeyDown="window_KeyDown">
     <Window.Resources>
-        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+        <Style x:Key="HAKED">
+            <Setter Property="TextElement.FontFamily" Value="Resources/HAKED.ttf" />
+        </Style>
+
+        <Color x:Key="WindowColor">#FFE8EDF9</Color>
+        <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
+        <Color x:Key="ContentAreaColorDark">#FF7381F9</Color>
+
+        <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
+        <Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
+        <Color x:Key="DisabledForegroundColor">#FF888888</Color>
+
+        <Color x:Key="SelectedBackgroundColor">#FFC5CBF9</Color>
+        <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
+
+        <Color x:Key="ControlLightColor">White</Color>
+        <Color x:Key="ControlMediumColor">#FF7381F9</Color>
+        <Color x:Key="ControlDarkColor">#FF211AA9</Color>
+
+        <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
+        <Color x:Key="ControlPressedColor">#FF211AA9</Color>
+
+
+        <Color x:Key="GlyphColor">#FF444444</Color>
+        <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
+
+        <!--Border colors-->
+        <Color x:Key="BorderLightColor">#FFCCCCCC</Color>
+        <Color x:Key="BorderMediumColor">#FF888888</Color>
+        <Color x:Key="BorderDarkColor">#FF444444</Color>
+
+        <Color x:Key="PressedBorderLightColor">#FF888888</Color>
+        <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
+
+        <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
+        <Color x:Key="DisabledBorderDarkColor">#FF888888</Color>
+
+        <Color x:Key="DefaultBorderBrushDarkColor">Black</Color>
+
+        <!--Control-specific resources.-->
+        <Color x:Key="HeaderTopColor">#FFC5CBF9</Color>
+        <Color x:Key="DatagridCurrentCellBorderColor">Black</Color>
+        <Color x:Key="SliderTrackDarkColor">#FFC5CBF9</Color>
+
+        <Color x:Key="NavButtonFrameColor">#FF3843C4</Color>
+
+
+
+        <Style x:Key="ScrollBarLineButton"
+       TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+            <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+            <Setter Property="Focusable"
+          Value="false" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Grid x:Name="Grid">
-                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Red" />
-                            <Border x:Name="Rectangle1" CornerRadius="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="Red" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Tag" Value="Horizontal">
-                                <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
-                                <Setter TargetName="Rectangle1" Property="Height" Value="7" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border x:Name="Border"
+                Margin="0"
+                CornerRadius="2"
+                BorderThickness="1" Background="Red" BorderBrush="{x:Null}" Visibility="Hidden" Width="0" Height="0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource ControlPressedColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Arrow"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource DisabledForegroundColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Path x:Name="Arrow"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="{Binding Content, 
+            RelativeSource={RelativeSource TemplatedParent}}" Height="76" Width="422" Visibility="Hidden" >
+                                <Path.Fill>
+                                    <SolidColorBrush Color="#FF7CD300"/>
+                                </Path.Fill>
+                            </Path>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!--ScrollBars-->
-        <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="IsTabStop" Value="false"/>
+        <Style x:Key="ScrollBarPageButton"
+       TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+            <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+            <Setter Property="IsTabStop"
+          Value="false" />
+            <Setter Property="Focusable"
+          Value="false" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border x:Name="rectangle"
-                                SnapsToDevicePixels="True"
-                                Background="White"
-                                CornerRadius="0"
-                                Opacity="0.4"
-                                Height="{TemplateBinding Height}"
-                                Width="{TemplateBinding Width}"/>
-                        <ControlTemplate.Triggers>
-                            <EventTrigger RoutedEvent="MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1" Duration="0:0:0.3" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="Opacity" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="0.4" Duration="0:0:0.3" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="Opacity" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="#FFD67D7D" Height="0" Width="0" MinWidth="3" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style TargetType="{x:Type ScrollBar}">
-            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
-            <Setter Property="Width" Value="14"/>
-            <Setter Property="Margin" Value="-14 0 0 0" />
-            <Setter Property="MinWidth" Value="{Binding Width, RelativeSource={RelativeSource Self}}"/>
+        <Style x:Key="ScrollBarThumb"
+       TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+            <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+            <Setter Property="IsTabStop"
+          Value="false" />
+            <Setter Property="Focusable"
+          Value="false" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ScrollBar}">
-                        <Grid x:Name="Bg" SnapsToDevicePixels="true" Background="#39787878">
+                    <ControlTemplate TargetType="{x:Type Thumb}">
 
-                            <Border Padding="0 4">
-                                <Track x:Name="PART_Track"
-                               IsDirectionReversed="true"
-                               IsEnabled="{TemplateBinding IsMouseOver}"
-                               Width="6"
-                               HorizontalAlignment="Center">
-                                    <Track.DecreaseRepeatButton>
-                                        <RepeatButton Opacity="0" Command="{x:Static ScrollBar.PageUpCommand}" />
-                                    </Track.DecreaseRepeatButton>
-                                    <Track.IncreaseRepeatButton>
-                                        <RepeatButton Opacity="0" Command="{x:Static ScrollBar.PageDownCommand}" />
-                                    </Track.IncreaseRepeatButton>
-                                    <Track.Thumb>
-                                        <Thumb Style="{StaticResource ScrollBarThumb}" />
-                                    </Track.Thumb>
-                                </Track>
-                            </Border>
-                        </Grid>
+                        <Border CornerRadius="0"
+                BorderThickness="0" Background="White" Width="Auto" HorizontalAlignment="Stretch" SnapsToDevicePixels="False" Margin="0" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="VerticalScrollBar"
+                 TargetType="{x:Type ScrollBar}">
+            <Grid Width="10" HorizontalAlignment="Right" Margin="0,1,1,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="5" />
+                    <RowDefinition Height="0.00001*" />
+                    <RowDefinition MaxHeight="5" />
+                </Grid.RowDefinitions>
+                <Border Grid.RowSpan="3"
+            CornerRadius="0"
+            Background="#5EF0F0F0" Width="10" Height="Auto" Panel.ZIndex="-3" />
+                <RepeatButton Grid.Row="0"
+                  Style="{StaticResource ScrollBarLineButton}"
+                  Height="0"
+                  Command="ScrollBar.LineUpCommand"
+                  Content="M 0 4 L 8 4 L 4 0 Z" Panel.ZIndex="3" Width="0" Background="{x:Null}" />
+                <Track x:Name="PART_Track"
+           Grid.Row="1"
+           IsDirectionReversed="true" Margin="0">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource ScrollBarPageButton}"
+                      Command="ScrollBar.PageUpCommand" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource ScrollBarThumb}"
+               Margin="1,0,1,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource ScrollBarPageButton}"
+                      Command="ScrollBar.PageDownCommand" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="HorizontalScrollBar"
+                 TargetType="{x:Type ScrollBar}">
+            <Grid Height="10" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="5" />
+                    <ColumnDefinition Width="0.00001*" />
+                    <ColumnDefinition MaxWidth="5" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="3"
+            CornerRadius="0"
+            Background="#B3F0F0F0" />
+
+                <Track x:Name="PART_Track"
+           Grid.Column="1"
+           IsDirectionReversed="False" Margin="0,1">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource ScrollBarPageButton}"
+                      Command="ScrollBar.PageLeftCommand" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource ScrollBarThumb}"
+                Width="Auto" Height="Auto">
+
+                            <Thumb.BorderBrush>
+
+                                <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,0">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="{DynamicResource BorderLightColor}"
+                                Offset="0.0" />
+                                            <GradientStop Color="{DynamicResource BorderDarkColor}"
+                                Offset="1.0" />
+                                        </GradientStopCollection>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+
+                            </Thumb.BorderBrush>
+                        </Thumb>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource ScrollBarPageButton}"
+                      Command="ScrollBar.PageRightCommand" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ScrollBar}"
+       TargetType="{x:Type ScrollBar}">
+            <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+            <Setter Property="OverridesDefaultStyle"
+          Value="True" />
             <Style.Triggers>
-                <Trigger Property="Orientation" Value="Horizontal">
-                    <Setter Property="Width" Value="Auto"/>
-                    <Setter Property="MinWidth" Value="0"/>
-                    <Setter Property="Height" Value="14"/>
-                    <Setter Property="MinHeight" Value="{Binding Height, RelativeSource={RelativeSource Self}}"/>
-                    <Setter Property="Margin" Value="0 -14 0 0" />
-
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ScrollBar}">
-                                <Grid x:Name="Bg" SnapsToDevicePixels="true">
-                                    <Track x:Name="PART_Track"
-                                    IsEnabled="{TemplateBinding IsMouseOver}"
-                                    Height="6"
-                                       >
-                                        <Track.DecreaseRepeatButton>
-                                            <RepeatButton Opacity="0" Command="{x:Static ScrollBar.PageLeftCommand}"/>
-                                        </Track.DecreaseRepeatButton>
-                                        <Track.IncreaseRepeatButton>
-                                            <RepeatButton Opacity="0" Command="{x:Static ScrollBar.PageRightCommand}"/>
-                                        </Track.IncreaseRepeatButton>
-                                        <Track.Thumb>
-                                            <Thumb Style="{StaticResource ScrollBarThumb}" />
-                                        </Track.Thumb>
-                                    </Track>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
+                <Trigger Property="Orientation"
+             Value="Horizontal">
+                    <Setter Property="Width"
+              Value="Auto" />
+                    <Setter Property="Height"
+              Value="30" />
+                    <Setter Property="Template"
+              Value="{StaticResource HorizontalScrollBar}" />
+                </Trigger>
+                <Trigger Property="Orientation"
+             Value="Vertical">
+                    <Setter Property="Width"
+              Value="18" />
+                    <Setter Property="Height"
+              Value="Auto" />
+                    <Setter Property="Template"
+              Value="{StaticResource VerticalScrollBar}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Storyboard x:Key="OnLoaded1" RepeatBehavior="Forever">
+
+        <Style x:Key="LeftScrollViewer"
+       TargetType="{x:Type ScrollViewer}">
+            <Setter Property="OverridesDefaultStyle"
+          Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0*" />
+                                <ColumnDefinition Width="208*" MinWidth="10"/>
+                                <ColumnDefinition Width="0" MinWidth="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="0" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Column="1"
+                  BorderThickness="1,1,1,1" Grid.ColumnSpan="2" BorderBrush="{TemplateBinding BorderBrush}">
+                                <ScrollContentPresenter />
+                            </Border>
+                            <ScrollBar x:Name="PART_VerticalScrollBar"
+                     Value="{TemplateBinding VerticalOffset}"
+                     Maximum="{TemplateBinding ScrollableHeight}"
+                     ViewportSize="{TemplateBinding ViewportHeight}"
+                     Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="2" HorizontalAlignment="Left" BorderBrush="#B3FFFFFF" Foreground="Black" Background="#99FFFFFF" Width="10"/>
+                            <ScrollBar x:Name="PART_HorizontalScrollBar"
+                     Orientation="Horizontal"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Value="{TemplateBinding HorizontalOffset}"
+                     Maximum="{TemplateBinding ScrollableWidth}"
+                     ViewportSize="{TemplateBinding ViewportWidth}"
+                     Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Margin="0" Height="Auto" Grid.ColumnSpan="1"/>
+                            <Rectangle Width="10" Fill="White" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Height="10" VerticalAlignment="Bottom"></Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Storyboard x:Key="OnLoaded1" RepeatBehavior="1x">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="border">
                 <EasingDoubleKeyFrame KeyTime="0" Value="6">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="456">
+                <EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="528">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:7.9" Value="733">
+                <EasingDoubleKeyFrame KeyTime="0:0:7.9" Value="780">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -204,8 +384,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="OnLoaded2" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="border1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="2"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="316">
@@ -218,7 +396,18 @@
                         <BackEase EasingMode="EaseOut" Amplitude="-52"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="2.5">
+                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:9.3" Value="316">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="-50"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:11.5" Value="136">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="-52"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:13.3" Value="2.5">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseOut" Amplitude="-50"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -236,7 +425,18 @@
                         <BackEase EasingMode="EaseOut" Amplitude="-52"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="0.5">
+                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:9.3" Value="8">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="-50"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:11.5" Value="218">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="-52"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:13.3" Value="0.5">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseOut" Amplitude="-50"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -254,22 +454,42 @@
                         <BackEase EasingMode="EaseOut" Amplitude="-52"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="270">
+                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:9.3" Value="90">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="-50"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:11.5" Value="180">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="-52"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:13.3" Value="270">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseOut" Amplitude="-50"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="OnLoaded3" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="-7.5"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:4.3" Value="-105">
+                <EasingDoubleKeyFrame KeyTime="0:0:3.213" Value="-105">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BounceEase EasingMode="EaseIn" Bounces="0" Bounciness="1"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:8.8" Value="-7.5">
+                <EasingDoubleKeyFrame KeyTime="0:0:6.575" Value="-7.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut" Bounciness="1" Bounces="0"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:6.725" Value="-7.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:9.938" Value="-105">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseIn" Bounces="0" Bounciness="1"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:13.3" Value="-7.5">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BounceEase EasingMode="EaseOut" Bounciness="1" Bounces="0"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -277,35 +497,49 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:4.3" Value="-1.5">
+                <EasingDoubleKeyFrame KeyTime="0:0:3.213" Value="-1.5">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BounceEase EasingMode="EaseIn" Bounces="0" Bounciness="1"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:8.8" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:6.575" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut" Bounciness="1" Bounces="0"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:6.725" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:9.938" Value="-1.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseIn" Bounces="0" Bounciness="1"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:13.3" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BounceEase EasingMode="EaseOut" Bounciness="1" Bounces="0"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="border2">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:4.3" Value="180"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:8.8" Value="360"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)" Storyboard.TargetName="border3">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="13">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:8" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.KernelType)" Storyboard.TargetName="grid">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static KernelType.Gaussian}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.7" Value="{x:Static KernelType.Gaussian}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1.1" Value="{x:Static KernelType.Gaussian}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="exitBut">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:2.1" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:8.5" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="settingsBut">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:2.1" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:8.5" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="startBut">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:2.1" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:8.5" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+
         </Storyboard>
         <Storyboard x:Key="OnLoaded4">
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="grid2">
@@ -316,27 +550,146 @@
                 </EasingThicknessKeyFrame>
             </ThicknessAnimationUsingKeyFrames>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="stackPanel">
-                <EasingThicknessKeyFrame KeyTime="0:0:1" Value="1,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:1" Value="1,261,0,0"/>
             </ThicknessAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="border4">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="OnMouseEnter1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="mediaElement">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="100"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="startBut">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="settingsBut">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="exitBut">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="OnMouseLeave1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="mediaElement">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="startBut">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.3" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="settingsBut">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.3" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(local:MenuButtonsBackgroundBlur.BlurOn)" Storyboard.TargetName="exitBut">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.3" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="startButInfoShow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="startButInfo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="startButInfo">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="startButInfoHide">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="startButInfo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="startButInfo">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.4" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="settingsButInfoShow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="settingsButInfo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="settingsButInfo">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="settingsButInfoHide">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="settingsButInfo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="settingsButInfo">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.4" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+        <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
             <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
-            <BeginStoryboard x:Name="OnLoaded2_BeginStoryboard" Storyboard="{StaticResource OnLoaded2}"/>
-            <BeginStoryboard x:Name="OnLoaded3_BeginStoryboard" Storyboard="{StaticResource OnLoaded3}"/>
         </EventTrigger>
-        <EventTrigger RoutedEvent="UIElement.MouseDown">
+        <EventTrigger RoutedEvent="UIElement.MouseUp" SourceName="border4">
+            <RemoveStoryboard BeginStoryboardName="OnLoaded4_BeginStoryboard"/>
             <BeginStoryboard x:Name="OnLoaded4_BeginStoryboard" Storyboard="{StaticResource OnLoaded4}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="startBut">
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter1}"/>
+            <BeginStoryboard x:Name="startButInfoShow_BeginStoryboard" Storyboard="{StaticResource startButInfoShow}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="exitBut">
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard1" Storyboard="{StaticResource OnMouseEnter1}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="settingsBut">
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard2" Storyboard="{StaticResource OnMouseEnter1}"/>
+            <BeginStoryboard x:Name="settingsButInfoShow_BeginStoryboard" Storyboard="{StaticResource settingsButInfoShow}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="settingsBut">
+            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave1}"/>
+            <BeginStoryboard x:Name="settingsButInfoHide_BeginStoryboard" Storyboard="{StaticResource settingsButInfoHide}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="startBut">
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard3" Storyboard="{StaticResource OnMouseLeave1}"/>
+            <BeginStoryboard x:Name="startButInfoHide_BeginStoryboard" Storyboard="{StaticResource startButInfoHide}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="exitBut">
+            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard1" Storyboard="{StaticResource OnMouseLeave1}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="startButInfo">
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard4" Storyboard="{StaticResource startButInfoShow}"/>
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard5" Storyboard="{StaticResource OnMouseEnter1}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="startButInfo">
+            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard2" Storyboard="{StaticResource startButInfoHide}"/>
+            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard3" Storyboard="{StaticResource OnMouseLeave1}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="settingsButInfo">
+            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard6" Storyboard="{StaticResource OnMouseEnter1}"/>
+            <BeginStoryboard x:Name="settingsButInfoShow_BeginStoryboard1" Storyboard="{StaticResource settingsButInfoShow}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="settingsButInfo">
+            <BeginStoryboard x:Name="settingsButInfoHide_BeginStoryboard1" Storyboard="{StaticResource settingsButInfoHide}"/>
+            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard4" Storyboard="{StaticResource OnMouseLeave1}"/>
         </EventTrigger>
     </Window.Triggers>
     <Grid Background="#FF07081F">
-        <Grid x:Name="grid3" Margin="-657,-1015,-56,-44">
-            <Rectangle HorizontalAlignment="Left" Height="500" Margin="511,0,0,0" Stroke="White" VerticalAlignment="Top" Width="888"/>
-            <Grid x:Name="Background" Margin="511,0,0,0" Width="888" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <ScrollViewer Margin="-299,0,-324,0" Height="500" Width="1511" HorizontalAlignment="Left" VerticalAlignment="Top" >
 
-                    <Grid x:Name="grid" Background="#00091C36" RenderTransformOrigin="0.5,0.5" Height="500" Width="1502">
+        <Viewbox x:Name="Background" Stretch="UniformToFill" IsHitTestVisible="False" Visibility="Hidden">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Unloaded">
+                    <ei:ControlStoryboardAction x:Name="s" Storyboard="{StaticResource OnLoaded1}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid x:Name="grid5" Height="500" Width="911.111">
+                <ScrollViewer >
+
+                    <Grid x:Name="grid" Background="#00091C36" RenderTransformOrigin="0.5,0.5" Width="890">
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -410,61 +763,87 @@
                         <Grid.Effect>
                             <DropShadowEffect/>
                         </Grid.Effect>
-                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="HAKER:&#xA;" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="37.5,40.5,37.5,101.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="132" Height="47" FontFamily="HACKED" RenderTransformOrigin="0.5,0.5" Foreground="#FF00FF0C"/>
+                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="HAKER:&#xA;" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="37.5,40.5,37.5,101.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="132" Height="47" FontFamily="HACKED" RenderTransformOrigin="0.5,0.5" Foreground="#FF00FF0C" IsHitTestVisible="True"/>
                         <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="by BREND&#xA;" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="10,74,10,43.145" HorizontalAlignment="Center" VerticalAlignment="Center" Height="71.855" Foreground="White" FontFamily="HACKED" Width="187" RenderTransformOrigin="0.5,0.5"/>
                     </Grid>
 
                 </Border>
 
             </Grid>
-            <Rectangle x:Name="rectangle" Stroke="Black" Margin="0,971,0,0">
-                <Rectangle.Fill>
-                    <VisualBrush
-                        Visual="{Binding ElementName=Background, Mode=OneWay}" AlignmentX="Left" Stretch="UniformToFill" AlignmentY="Top" AutoLayoutContent="False">
-                        <VisualBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </VisualBrush.RelativeTransform>
-                    </VisualBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+        </Viewbox>
+        <Grid x:Name="grid4">
+            <MediaElement x:Name="mediaElement" Margin="0" Stretch="UniformToFill" Loaded="MediaElement_Loaded" Source="Resource/img/GameHaker 2018-10-25 14-21-02-731.mp4" SpeedRatio="1" MediaEnded="MediaElement_MediaEnded" UnloadedBehavior="Manual" LoadedBehavior="Manual">
+                <MediaElement.Effect>
+                    <BlurEffect Radius="0"/>
+                </MediaElement.Effect>
+            </MediaElement>
+            <Rectangle Fill="#02727070" Margin="0" Stroke="Black"/>
         </Grid>
         <Grid x:Name="grid2" Margin="0,-366,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Grid.Effect>
-                <DropShadowEffect Color="#FF38F700" ShadowDepth="10" BlurRadius="20"/>
-            </Grid.Effect>
-            <Label Content="HAKER" HorizontalAlignment="Center" Height="261" Margin="0,0,-239,0" VerticalAlignment="Top" Width="836" FontFamily="HACKED" FontSize="250" Foreground="White"/>
+            <Label Content="HAKER" HorizontalAlignment="Center" Height="261" Margin="0" VerticalAlignment="Top" Width="597" FontFamily="HACKED" FontSize="250" Foreground="White">
+                <Label.Effect>
+                    <DropShadowEffect BlurRadius="8" Direction="270" ShadowDepth="9"/>
+                </Label.Effect>
+            </Label>
         </Grid>
-        <Border BorderBrush="White" BorderThickness="1" Margin="0" IsHitTestVisible="True">
+        <Border x:Name="border4" BorderBrush="White" BorderThickness="1" Margin="0" IsHitTestVisible="True" OpacityMask="#03000000">
             <Border.Background>
                 <RadialGradientBrush>
-                    <GradientStop Color="#00000000" Offset="0.44"/>
-                    <GradientStop Color="#3F000000" Offset="1"/>
+                    <GradientStop Color="#00000000" Offset="0.721"/>
+                    <GradientStop Color="#2D000000" Offset="1"/>
                 </RadialGradientBrush>
             </Border.Background>
         </Border>
         <Grid x:Name="Foreground" Margin="0">
 
-            <MediaElement HorizontalAlignment="Center" Height="506" Margin="254,402,754,172" VerticalAlignment="Center" Width="912" Source="Resource/img/GameHaker 2018-10-20 11-36-06-395.mp4" Stretch="None" Loaded="MediaElement_Loaded" LoadedBehavior="Manual" Visibility="Hidden"/>
-
-            <Button x:Name="but" Content="Button" Click="Button_Click" Margin="147,51,0,0" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Height="286" Width="801"/>
-            <StackPanel x:Name="stackPanel" Margin="-603,0,0,0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <local:MenuButtonsBackgroundBlur HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="-20,0,0,0" MouseUp="MenuButtonsBackgroundBlur_MouseUp" Text="OffBlur">
-                    <i:Interaction.Behaviors>
-                        <ei:MouseDragElementBehavior/>
-                    </i:Interaction.Behaviors>
+            <Button x:Name="but" Content="Button" Click="Button_Click" Margin="147,51,1404,852" FontSize="24" Visibility="Hidden"/>
+            <StackPanel x:Name="stackPanel" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,261,0,0">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-641"/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <local:MenuButtonsBackgroundBlur x:Name="startBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" MouseUp="MenuButtonsBackgroundBlur_MouseUp" Text="Start" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}"/>
+                <local:MenuButtonsBackgroundBlur x:Name="settingsBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" MouseUp="MenuButtonsBackgroundBlur_MouseUp_1" Text="Settings" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}"/>
+                <local:MenuButtonsBackgroundBlur x:Name="exitBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" TextColor="Red" RenderTransformOrigin="0.5,0.5" Text="Exit" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}" BlurOn="False" Panel.ZIndex="-1">
+                    <local:MenuButtonsBackgroundBlur.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-20"/>
+                        </TransformGroup>
+                    </local:MenuButtonsBackgroundBlur.RenderTransform>
                 </local:MenuButtonsBackgroundBlur>
-                <local:MenuButtonsBackgroundBlur HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="-20,0,0,0" MouseUp="MenuButtonsBackgroundBlur_MouseUp_1" Text="OnBlur"/>
-                <local:MenuButtonsBackgroundBlur HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="-20,0,0,0" Text="Exit" TextColor="Red"/>
 
             </StackPanel>
+            <ScrollViewer x:Name="startButInfo" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" VerticalScrollBarVisibility="Auto" Opacity="0">
+                <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
+                    <WrapPanel.Effect>
+                        <DropShadowEffect BlurRadius="6"/>
+                    </WrapPanel.Effect>
+                    <Label Content="Start Button" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
+                    <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Span><Run Text="Кнопка для перехода в меню сохраннений" BaselineAlignment="Center"/></Span></TextBlock>
+                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="там вы можете выбрать 3 режима сложности"/><Run BaselineAlignment="Center" Text=":"/></TextBlock>
+                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="лёгкий, нормальный и сложный"/></TextBlock>
+                    <Image Height="252" Source="Resource/img/play-flat.png" Margin="160,3,160,0"/>
+                </WrapPanel>
+            </ScrollViewer>
+            <ScrollViewer x:Name="settingsButInfo" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" VerticalScrollBarVisibility="Auto" Opacity="0">
+                <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
+                    <WrapPanel.Effect>
+                        <DropShadowEffect BlurRadius="6"/>
+                    </WrapPanel.Effect>
+                    <Label Content="Settings" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
+                    <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="Кнопка для перехода в меню "/><Run BaselineAlignment="Center" Text="настроек"/></TextBlock>
+                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="там вы можете "/><Run BaselineAlignment="Center" Text="настроеть такие параметры"/><Run BaselineAlignment="Center" Text=":"/></TextBlock>
+                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="отключение размытия под кнопками, отключение заднего фона и многое другое"/></TextBlock>
+                    <Image Height="252" Source="Resource/img/settings-flat.png" Margin="160,3,160,0"/>
+                </WrapPanel>
+            </ScrollViewer>
         </Grid>
-        <ScrollViewer Margin="618,464,764,310" HorizontalScrollBarVisibility="Visible" Background="Black" Visibility="Hidden">
-            <Rectangle Fill="#66FFFFFF" Height="160" Width="506" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,383,0,0"/>
-        </ScrollViewer>
     </Grid>
 </Window>

@@ -27,6 +27,9 @@ namespace GameHaker
 
         private bool isLoadedEnd = false;
 
+        private TranslateTransform trT = new TranslateTransform();
+        private TransformGroup trG = new TransformGroup();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -158,8 +161,25 @@ namespace GameHaker
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
-            if (isLoadedEnd == false) WindowState = WindowState.Minimized;
-            //else isLoadedEnd = true;
+            if (isLoadedEnd == true) WindowState = WindowState.Minimized;
+            else isLoadedEnd = true;
+
+            trG.Children.Add(trT);
+            but.Margin = new Thickness(0, 0, 0, 0);
+        }
+
+        private void Rectangle_LayoutUpdated(object sender, EventArgs e)
+        {
+
+            but.Width = -f.RenderTransform.Transform(new Point(0, 0)).X - 8 + l.RenderTransform.Transform(new Point(0, 0)).X;
+            but.Height = -f.RenderTransform.Transform(new Point(0, 0)).Y - 8 + l.RenderTransform.Transform(new Point(0, 0)).Y;
+
+            trT.X = f.RenderTransform.Transform(new Point(0, 0)).X + 8;
+            trT.Y = f.RenderTransform.Transform(new Point(0, 0)).Y + 8;
+
+            but.RenderTransform = trG;
+
+            pq.Content = f.RenderTransform.Transform(new Point(0, 0)).X;
         }
     }
 

@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GameHaker"
              StartupUri="Main.xaml">
+             
     <Application.Resources>
-
+        <!--StartupUri="Main.xaml"> -->
+        <!--StartupUri="Forms/MainWindow.xaml">-->
         <Style x:Key="GridStyle1" TargetType="{x:Type Grid}">
             <Setter Property="Width" Value="33"/>
             <Setter Property="Background" Value="#FFD43232"/>

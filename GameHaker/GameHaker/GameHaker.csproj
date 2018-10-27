@@ -131,6 +131,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resource\HAKED.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -153,9 +154,11 @@
     <Resource Include="Resource\img\blurButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resource\img\GameHaker 2018-10-20 11-36-06-395.mp4">
+    <Content Include="Resource\img\GameHaker 2018-10-25 14-21-02-731.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resource\img\settings-flat.png" />
+    <Resource Include="Resource\img\play-flat.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

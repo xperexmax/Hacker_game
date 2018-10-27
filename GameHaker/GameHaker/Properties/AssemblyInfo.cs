@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("GameHaker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("BREND Corporation")]
 [assembly: AssemblyProduct("GameHaker")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

@@ -5,28 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GameHaker"
              xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" x:Name="userControl" x:Class="GameHaker.MenuButtonsBackgroundBlur"
-             mc:Ignorable="d" Foreground="Red" Height="58" Width="386" RenderTransformOrigin="0.5,0.5" LayoutUpdated="userControl_LayoutUpdated">
+             mc:Ignorable="d" Foreground="Red" Height="58" Width="386" RenderTransformOrigin="0.5,0.5" LayoutUpdated="userControl_LayoutUpdated" TargetUpdated="userControl_TargetUpdated">
     <UserControl.Resources>
         <Storyboard x:Key="OnMouseEnter1">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="userControl">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="1"/>
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
                 <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#A8FFFFFF"/>
             </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.05"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="OnMouseLeave1">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="userControl">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="-20,0,0,0">
-                    <EasingThicknessKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="1"/>
-                    </EasingThicknessKeyFrame.EasingFunction>
-                </EasingThicknessKeyFrame>
-            </ThicknessAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
                 <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#66FFFFFF"/>
             </ColorAnimationUsingKeyFrames>
@@ -34,8 +26,25 @@
                 <EasingColorKeyFrame KeyTime="0:0:0.3" Value="Black"/>
             </ColorAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="userControl">
-                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="White">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="2"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
             </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-20">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="OnPreviewMouseLeftButtonDown1">
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="userControl">
@@ -75,7 +84,7 @@
             <ScaleTransform/>
             <SkewTransform/>
             <RotateTransform/>
-            <TranslateTransform/>
+            <TranslateTransform X="-20"/>
         </TransformGroup>
     </UserControl.RenderTransform>
     <UserControl.Triggers>
@@ -97,9 +106,17 @@
             <ScrollViewer.OpacityMask>
                 <ImageBrush ImageSource="/GameHaker;component/Resource/img/blurButton.png" Stretch="Uniform"/>
             </ScrollViewer.OpacityMask>
-            <Rectangle x:Name="blur" Loaded="rectangle1_Loaded" Margin="0">
+            <Rectangle x:Name="blur" Loaded="rectangle1_Loaded" Margin="0" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Effect>
-                    <BlurEffect Radius="37" RenderingBias="Quality"/>
+                    <BlurEffect Radius="30" RenderingBias="Quality"/>
                 </Rectangle.Effect>
 
             </Rectangle>
@@ -115,6 +132,6 @@
             </Label.Effect>
         </Label>
     </Grid>
-    
-    
+
+
 </UserControl>
