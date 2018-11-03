@@ -1,0 +1,28 @@
+﻿<UserControl x:Name="userControl" x:Class="GameHaker.ButFlat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameHaker"
+             mc:Ignorable="d" MinWidth="35" MinHeight="35" MouseEnter="userControl_MouseEnter" MouseLeave="userControl_MouseLeave" PreviewMouseLeftButtonDown="userControl_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="userControl_MouseEnter" d:DesignWidth="325.334" d:DesignHeight="209.333">
+    <UserControl.Resources>
+        <Color x:Key="normalColor">Transparent</Color>
+        <Color x:Key="hoverColor">#34FFFFFF</Color>
+        <Color x:Key="pressedColor">#9EB9B9B9</Color>
+
+    </UserControl.Resources>
+    <Grid>
+        <Rectangle x:Name="rectangle" Stroke="White">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{DynamicResource normalColor}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Grid Margin="0">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="4" ShadowDepth="3"/>
+            </Grid.Effect>
+            <Label x:Name="label" Content="НЕТ" Margin="0" VerticalAlignment="Center" Foreground="White" Padding="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="American Captain Cyrillic" FontSize="72" TextOptions.TextHintingMode="Fixed" TextOptions.TextFormattingMode="Display"/>
+        </Grid>
+        <Viewbox x:Name="viewbox"/>
+    </Grid>
+</UserControl>

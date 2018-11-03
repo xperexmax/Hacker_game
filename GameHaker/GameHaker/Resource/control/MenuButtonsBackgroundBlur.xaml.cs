@@ -178,7 +178,7 @@ namespace GameHaker
             set { SetValue(fontSizeProperty, value); }
         }
 
-        new public bool BlurOn
+        public bool BlurOn
         {
             get { return (bool)GetValue(blurOnProperty); }
             set { SetValue(blurOnProperty, value); }

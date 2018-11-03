@@ -88,5 +88,22 @@ namespace GameHaker
             s.Play();
 
         }
+
+
+
+        private void loadButInfo(object sender, RoutedEventArgs e)
+        {
+            TransformGroup gr = new TransformGroup();
+            TranslateTransform tr = new TranslateTransform();
+
+            ScrollViewer s = sender as ScrollViewer;
+
+            gr.Children.Add(tr);
+            tr.X = tr.Y = 0;
+
+            s.RenderTransform = gr;
+            s.Opacity = 0;
+
+        }
     }
 }

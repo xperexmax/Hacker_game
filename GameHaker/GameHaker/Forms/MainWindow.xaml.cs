@@ -33,6 +33,7 @@ namespace GameHaker
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void PageChange(object obj, RoutedEventArgs e)
@@ -70,6 +71,7 @@ namespace GameHaker
                 this.left = left;
                 this.top = top;
                 this.bottom = bottom;
+                
                 this.right = right;
             }
 
