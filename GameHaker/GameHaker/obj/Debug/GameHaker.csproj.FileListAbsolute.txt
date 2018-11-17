@@ -33,3 +33,5 @@ E:\Visual Studio 2017\GameHaker\GameHaker\obj\Debug\GameHaker_Content.g.cs
 E:\Visual Studio 2017\GameHaker\GameHaker\bin\Debug\Resource\img\GameHaker 2018-10-25 14-21-02-731.mp4
 E:\Visual Studio 2017\GameHaker\GameHaker\obj\Debug\Resource\control\ButFlat.g.cs
 E:\Visual Studio 2017\GameHaker\GameHaker\obj\Debug\Resource\control\ButFlat.baml
+E:\Visual Studio 2017\GameHaker\GameHaker\obj\Debug\Resource\control\AppForm.g.cs
+E:\Visual Studio 2017\GameHaker\GameHaker\obj\Debug\Resource\control\AppForm.baml

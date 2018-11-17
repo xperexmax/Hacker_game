@@ -241,7 +241,7 @@ namespace GameHaker
 
         private void userControl_TargetUpdated(object sender, DataTransferEventArgs e)
         {
-            label.Content = "10";
+            //label.Content = "10";
         }
     }
 }

@@ -76,6 +76,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\GameControl\GameControl.cs" />
+    <Compile Include="Classes\GameControl\GameControlClasses\AppTaskBlock\DataAppTaskBlock.cs" />
+    <Compile Include="Classes\GameControl\GameControlClasses\GameTaskPanelControl.cs" />
+    <Compile Include="Classes\HelpFunctions.cs" />
+    <Compile Include="Resource\control\AppForm.xaml.cs">
+      <DependentUpon>AppForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resource\control\ButFlat.xaml.cs">
       <DependentUpon>ButFlat.xaml</DependentUpon>
     </Compile>
@@ -94,6 +101,10 @@
     <Compile Include="Resource\control\TaskPanelBlock.xaml.cs">
       <DependentUpon>TaskPanelBlock.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resource\control\AppForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\control\ButFlat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,5 +215,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

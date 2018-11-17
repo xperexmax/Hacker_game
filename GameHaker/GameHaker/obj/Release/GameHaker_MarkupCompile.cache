@@ -10,11 +10,11 @@ none
 false
 TRACE
 E:\Visual Studio 2017\GameHaker\GameHaker\App.xaml
-6-121704481
-11945217707
-14-345793172
-20-1674664224
-Forms\MainWindow.xaml;Main.xaml;Resource\control\MenuButtonsBackgroundBlur.xaml;Resource\pages\Page1.xaml;Resource\pages\Page2.xaml;Resource\control\TaskPanelBlock.xaml;
+8-2003100025
+177741183
+16-266145116
+20-1485063676
+Resource\control\AppFrom.xaml;Resource\control\ButFlat.xaml;Forms\MainWindow.xaml;Main.xaml;Resource\control\MenuButtonsBackgroundBlur.xaml;Resource\pages\Page1.xaml;Resource\pages\Page2.xaml;Resource\control\TaskPanelBlock.xaml;
 resource\img\dd.png
-True
+False
 

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/img/gamehaker%202018-10-20%2011-36-06-395.mp4")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/img/gamehaker%202018-10-25%2014-21-02-731.mp4")]
 
 

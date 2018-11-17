@@ -22,10 +22,13 @@ namespace GameHaker
     public partial class Main : Window
     {
         private List<MenuButtonsBackgroundBlur> listBut = new List<MenuButtonsBackgroundBlur>();
+        private Action yesD = delegate () { App.Current.Shutdown(); };
+
         public Main()
         {
             
             InitializeComponent();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -104,6 +107,55 @@ namespace GameHaker
             s.RenderTransform = gr;
             s.Opacity = 0;
 
+        }
+
+        public void ShowDialog(string title = "Вы хотите выйти?", string message = "Выйти из игры на рабочий стол?", Action yes = null)
+        {
+            TitleD.Content = title;
+            Message.Text = message;
+            ShowDialogControl.Storyboard.Begin();
+
+        }
+
+        public void HideDialog()
+        {
+            HideDialogControl.Storyboard.Begin();
+        }
+
+        private void exitBut_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ShowDialog();
+        }
+
+        private void loadDialog(object sender, RoutedEventArgs e)
+        {
+            TransformGroup gr = new TransformGroup();
+            TranslateTransform tr = new TranslateTransform();
+
+            Grid s = sender as Grid;
+
+            gr.Children.Add(tr);
+            tr.X = tr.Y = 0;
+
+            s.RenderTransform = gr;
+            s.Opacity = 0;
+        }
+
+        private void ButFlat_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            HideDialog();
+        }
+
+        private void ButFlat_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        {
+            if (yesD == null)
+            {
+                App.Current.Shutdown();
+                return;
+            }
+            yesD();
+
+            
         }
     }
 }

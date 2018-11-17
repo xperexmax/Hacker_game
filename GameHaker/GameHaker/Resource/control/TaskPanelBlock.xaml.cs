@@ -28,6 +28,13 @@ namespace GameHaker
             InitializeComponent();
         }
 
+        public TaskPanelBlock(Brush image = null, Nullable<Color> notifColor = null)
+        {
+            InitializeComponent();
+            this.Image = image;
+            this.NotifColor = (Color)notifColor;
+        }
+
         static TaskPanelBlock()
         {
             imageProperty = DependencyProperty.Register("Image", typeof(Brush), typeof(TaskPanelBlock), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(ImagePropertyChange)));

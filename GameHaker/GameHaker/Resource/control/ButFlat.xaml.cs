@@ -90,7 +90,7 @@ namespace GameHaker
             set { SetValue(textColorProperty, value); }
         }
 
-        new public int FontSizez
+        public int FontSizez
         {
             get { return (int)GetValue(fontSizeProperty); }
             set { SetValue(fontSizeProperty, value); }

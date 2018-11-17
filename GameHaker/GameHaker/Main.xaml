@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GameHaker"
         xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Name="window" x:Class="GameHaker.Main"
         mc:Ignorable="d"
-        Title="Main" Height="720" Width="1280" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" KeyDown="window_KeyDown">
+        Title="Main" Height="1080" Width="1920" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" KeyDown="window_KeyDown">
     <Window.Resources>
         <Style x:Key="HAKED">
             <Setter Property="TextElement.FontFamily" Value="Resources/HAKED.ttf" />
@@ -251,6 +251,7 @@
         </Storyboard>
         <Storyboard x:Key="OnLoaded4">
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="grid2">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0,-261,0,0"/>
                 <EasingThicknessKeyFrame KeyTime="0:0:1" Value="0">
                     <EasingThicknessKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseInOut"/>
@@ -354,6 +355,65 @@
                 <DiscreteBooleanKeyFrame KeyTime="0:0:0.4" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="ShowDialog">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Dialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="border5">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1.2">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="border5">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1.2">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="Dialog">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="MainPanel">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="100"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideDialog">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="MainPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Dialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Dialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Dialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="Dialog">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.4" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
@@ -418,232 +478,269 @@
             <BeginStoryboard x:Name="closeButInfoHide_BeginStoryboard1" Storyboard="{StaticResource closeButInfoHide}"/>
         </EventTrigger>
     </Window.Triggers>
-    <Grid Background="#FF07081F">
+    <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid x:Name="MainGrid" Background="#FF07081F" HorizontalAlignment="Left" VerticalAlignment="Top" Height="{Binding Height, ElementName=window}" Width="{Binding Width, ElementName=window}">
+                <Grid x:Name="MainPanel" Margin="0">
+                    <Grid.Effect>
+                        <BlurEffect Radius="0"/>
+                    </Grid.Effect>
 
-        <Viewbox x:Name="_Background" Stretch="UniformToFill" IsHitTestVisible="False" Visibility="Hidden" IsEnabled="False">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Unloaded">
-                    <ei:ControlStoryboardAction x:Name="s" Storyboard="{StaticResource OnLoaded1}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <Grid x:Name="grid5" Height="500" Width="911.111">
-                <ScrollViewer >
+                    <Viewbox x:Name="_Background" Stretch="None" IsHitTestVisible="False" Visibility="Hidden" IsEnabled="False" Margin="0,0,0,3" Opacity="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Unloaded">
+                                <ei:ControlStoryboardAction x:Name="s" Storyboard="{StaticResource OnLoaded1}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Grid x:Name="grid5" Height="500" Width="911.111">
+                            <ScrollViewer >
 
-                    <Grid x:Name="grid" Background="#00091C36" RenderTransformOrigin="0.5,0.5" Width="890">
-                        <Grid.RenderTransform>
+                                <Grid x:Name="grid" Background="#00091C36" RenderTransformOrigin="0.5,0.5" Width="890">
+                                    <Grid.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Grid.RenderTransform>
+                                    <Grid.Effect>
+                                        <BlurEffect Radius="0"/>
+                                    </Grid.Effect>
+                                    <Border x:Name="border1" BorderBrush="White" BorderThickness="7" Margin="-338,75,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Height="75" Panel.ZIndex="1">
+                                        <Border.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="18.686"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <Grid x:Name="grid1" Margin="-125,172.5,0,2" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                        <Grid.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Grid.RenderTransform>
+                                        <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="625.5,183,0,0" VerticalAlignment="Top" Width="30"/>
+                                        <Border x:Name="border2" BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="477,219,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
+                                            <Border.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Border.RenderTransform>
+                                        </Border>
+                                        <Border x:Name="border3" BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="40.5,234,0,0" VerticalAlignment="Top" Width="30">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="1"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="699,73.5,0,0" VerticalAlignment="Top" Width="30"/>
+                                        <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30"/>
+                                        <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="256.5,135,0,0" VerticalAlignment="Top" Width="30"/>
+                                        <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="442.5,45,0,0" VerticalAlignment="Top" Width="30"/>
+                                        <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="118.5,73.5,0,0" VerticalAlignment="Top" Width="30"/>
+                                    </Grid>
+                                </Grid>
+                            </ScrollViewer>
+                            <Border x:Name="border" BorderBrush="White" BorderThickness="7" HorizontalAlignment="Left" Height="209" Margin="-272,120,0,0" VerticalAlignment="Top" Width="227" CornerRadius="4" RenderTransformOrigin="0.5,0.5">
+                                <Border.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#5AFFFFFF" Offset="0"/>
+                                        <GradientStop Color="#5AB8F9FF" Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-17.044"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                                <Grid>
+                                    <Grid.Effect>
+                                        <DropShadowEffect/>
+                                    </Grid.Effect>
+                                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="HAKER:&#xA;" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="37.5,40.5,37.5,101.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="132" Height="47" FontFamily="HACKED" RenderTransformOrigin="0.5,0.5" Foreground="#FF00FF0C" IsHitTestVisible="True"/>
+                                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="by BREND&#xA;" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="10,74,10,43.145" HorizontalAlignment="Center" VerticalAlignment="Center" Height="71.855" Foreground="White" FontFamily="HACKED" Width="187" RenderTransformOrigin="0.5,0.5"/>
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+                    </Viewbox>
+                    <Grid x:Name="grid4" Margin="0">
+                        <MediaElement x:Name="mediaElement" Margin="0" Stretch="UniformToFill" Loaded="MediaElement_Loaded" Source="Resource/img/GameHaker 2018-10-25 14-21-02-731.mp4" SpeedRatio="1" MediaEnded="MediaElement_MediaEnded" UnloadedBehavior="Manual" LoadedBehavior="Manual">
+                            <MediaElement.Effect>
+                                <BlurEffect Radius="0"/>
+                            </MediaElement.Effect>
+                        </MediaElement>
+                        <Rectangle Fill="#02727070" Margin="0" Stroke="Black"/>
+                        <Grid x:Name="grid2" Margin="661.5,-261,661.5,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            <Label Content="HAKER" HorizontalAlignment="Center" Height="261" Margin="0" VerticalAlignment="Top" Width="597" FontFamily="HACKED" FontSize="250" Foreground="White">
+                                <Label.Effect>
+                                    <DropShadowEffect BlurRadius="8" Direction="270" ShadowDepth="9"/>
+                                </Label.Effect>
+                            </Label>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="_Foreground" Margin="0">
+
+                        <Button x:Name="but" Content="Button" Click="Button_Click" Margin="147,51,1404,852" FontSize="24" Visibility="Hidden"/>
+                        <StackPanel x:Name="stackPanel" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,261,0,0">
+                            <StackPanel.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-641"/>
+                                </TransformGroup>
+                            </StackPanel.RenderTransform>
+                            <local:MenuButtonsBackgroundBlur x:Name="startBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" MouseUp="MenuButtonsBackgroundBlur_MouseUp" Text="Start" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}"/>
+                            <local:MenuButtonsBackgroundBlur x:Name="settingsBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" MouseUp="MenuButtonsBackgroundBlur_MouseUp_1" Text="Settings" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}"/>
+                            <local:MenuButtonsBackgroundBlur x:Name="exitBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" TextColor="Red" RenderTransformOrigin="0.5,0.5" Text="Exit" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}" BlurOn="False" Panel.ZIndex="-1" PreviewMouseLeftButtonUp="exitBut_PreviewMouseLeftButtonUp">
+                                <local:MenuButtonsBackgroundBlur.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="-20"/>
+                                    </TransformGroup>
+                                </local:MenuButtonsBackgroundBlur.RenderTransform>
+                            </local:MenuButtonsBackgroundBlur>
+
+                        </StackPanel>
+                        <ScrollViewer x:Name="startButInfo" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" RenderTransformOrigin="0.5,0.5" Loaded="loadButInfo" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="1670"/>
+                                </TransformGroup>
+                            </ScrollViewer.RenderTransform>
+                            <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
+                                <WrapPanel.Effect>
+                                    <DropShadowEffect BlurRadius="6"/>
+                                </WrapPanel.Effect>
+                                <Label Content="Start Button" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
+                                <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Span><Run Text="Кнопка для перехода в меню сохраннений" BaselineAlignment="Center"/></Span></TextBlock>
+                                <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="там вы можете выбрать 3 режима сложности"/><Run BaselineAlignment="Center" Text=":"/></TextBlock>
+                                <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="лёгкий, нормальный и сложный"/></TextBlock>
+                                <Image Height="252" Source="Resource/img/play-flat.png" Margin="160,3,160,0"/>
+                            </WrapPanel>
+                        </ScrollViewer>
+                        <ScrollViewer x:Name="settingsButInfo" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" VerticalScrollBarVisibility="Auto" Opacity="0.93" RenderTransformOrigin="0.5,0.5" Loaded="loadButInfo">
+                            <ScrollViewer.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="880"/>
+                                </TransformGroup>
+                            </ScrollViewer.RenderTransform>
+
+                            <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
+                                <WrapPanel.Effect>
+                                    <DropShadowEffect BlurRadius="6"/>
+                                </WrapPanel.Effect>
+                                <Label Content="Settings" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
+                                <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="Кнопка для перехода в меню "/><Run BaselineAlignment="Center" Text="настроек"/></TextBlock>
+                                <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="там вы можете "/><Run BaselineAlignment="Center" Text="настроеть такие параметры"/><Run BaselineAlignment="Center" Text=":"/></TextBlock>
+                                <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="отключение размытия под кнопками, отключение заднего фона и многое другое"/></TextBlock>
+                                <Image Height="252" Source="Resource/img/settings-flat.png" Margin="160,3,160,0"/>
+                            </WrapPanel>
+                        </ScrollViewer>
+                        <ScrollViewer x:Name="settingsButExit" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" VerticalScrollBarVisibility="Auto" Opacity="0.93" RenderTransformOrigin="0.5,0.5" Loaded="loadButInfo">
+                            <ScrollViewer.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="2457"/>
+                                </TransformGroup>
+                            </ScrollViewer.RenderTransform>
+
+                            <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
+                                <WrapPanel.Effect>
+                                    <DropShadowEffect BlurRadius="6"/>
+                                </WrapPanel.Effect>
+                                <Label Content="Close button" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
+                                <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="Кнопка для "/><Run BaselineAlignment="Center" Text="выхода из игры"/></TextBlock>
+                                <Image Height="252" Source="Resource/img/close-flat.png" Margin="160,3,160,0"/>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+                <Grid x:Name="Dialog" Margin="0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Loaded="loadDialog">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Unloaded">
+                            <ei:ControlStoryboardAction x:Name="ShowDialogControl" Storyboard="{StaticResource ShowDialog}"/>
+                            <ei:ControlStoryboardAction x:Name="HideDialogControl" Storyboard="{StaticResource HideDialog}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-2670"/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Grid.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#7E000000" Offset="1"/>
+                            <GradientStop Color="#34808080"/>
+                        </RadialGradientBrush>
+                    </Grid.Background>
+                    <Border x:Name="border5" BorderBrush="White" BorderThickness="1" Height="335" Margin="0" Width="550" Background="#7F000000" MinWidth="550" MinHeight="335" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
                                 <SkewTransform/>
                                 <RotateTransform/>
                                 <TranslateTransform/>
                             </TransformGroup>
-                        </Grid.RenderTransform>
-                        <Grid.Effect>
-                            <BlurEffect Radius="0"/>
-                        </Grid.Effect>
-                        <Border x:Name="border1" BorderBrush="White" BorderThickness="7" Margin="-338,75,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Height="75" Panel.ZIndex="1">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="18.686"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Grid x:Name="grid1" Margin="-125,172.5,0,2" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center">
-                            <Grid.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Grid.RenderTransform>
-                            <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="625.5,183,0,0" VerticalAlignment="Top" Width="30"/>
-                            <Border x:Name="border2" BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="477,219,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
-                                <Border.RenderTransform>
+                        </Border.RenderTransform>
+                        <Grid Margin="0">
+                            <local:ButFlat Margin="383,287.5,4,6" Text="Да" NormalColor="#6442FF53" HoverColor="#7F00FF2E" PressedColor="#8C208901" FontSizez="34" PreviewMouseLeftButtonUp="ButFlat_PreviewMouseLeftButtonUp_1"/>
+                            <local:ButFlat Margin="217,287.5,170,6" Text="нет" NormalColor="#64FF3535" HoverColor="#7EFF0000" PressedColor="#8C890101" FontSizez="34" PreviewMouseLeftButtonUp="ButFlat_PreviewMouseLeftButtonUp"/>
+                            <Path Data="M52.333333,201.5 L417,242.16667" Fill="White" Height="1" Margin="-1,0,-1,52" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" StrokeThickness="2">
+                                <Path.RenderTransform>
                                     <TransformGroup>
-                                        <ScaleTransform/>
+                                        <ScaleTransform ScaleY="-1"/>
                                         <SkewTransform/>
                                         <RotateTransform/>
                                         <TranslateTransform/>
                                     </TransformGroup>
-                                </Border.RenderTransform>
-                            </Border>
-                            <Border x:Name="border3" BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="40.5,234,0,0" VerticalAlignment="Top" Width="30">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="1"/>
-                                </Border.Effect>
-                            </Border>
-                            <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="699,73.5,0,0" VerticalAlignment="Top" Width="30"/>
-                            <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30"/>
-                            <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="256.5,135,0,0" VerticalAlignment="Top" Width="30"/>
-                            <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="442.5,45,0,0" VerticalAlignment="Top" Width="30"/>
-                            <Border BorderBrush="White" BorderThickness="4" HorizontalAlignment="Left" Height="30" Margin="118.5,73.5,0,0" VerticalAlignment="Top" Width="30"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Label x:Name="TitleD" Content="Вы хотите выйти?" Margin="0" VerticalContentAlignment="Center" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1" Padding="10,5,5,5" VerticalAlignment="Top" Background="#11FFFFFF" HorizontalContentAlignment="Center">
+                                <Label.Effect>
+                                    <DropShadowEffect Color="Red" Opacity="0.5" ShadowDepth="3" BlurRadius="28"/>
+                                </Label.Effect>
+                            </Label>
+                            <TextBlock x:Name="Message" Margin="12,78,12,63" FontSize="24" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" Effect="{Binding Effect, ElementName=TitleD}"><Run BaselineAlignment="Center" Text="Выйти из игры на рабочий стол?"/></TextBlock>
                         </Grid>
-                    </Grid>
-                </ScrollViewer>
-                <Border x:Name="border" BorderBrush="White" BorderThickness="7" HorizontalAlignment="Left" Height="209" Margin="-272,120,0,0" VerticalAlignment="Top" Width="227" CornerRadius="4" RenderTransformOrigin="0.5,0.5">
+                    </Border>
+                </Grid>
+                <Border x:Name="border4" BorderBrush="White" BorderThickness="1" Margin="0" IsHitTestVisible="True" OpacityMask="#03000000">
                     <Border.Background>
                         <RadialGradientBrush>
-                            <GradientStop Color="#5AFFFFFF" Offset="0"/>
-                            <GradientStop Color="#5AB8F9FF" Offset="1"/>
+                            <GradientStop Color="#00000000" Offset="0.721"/>
+                            <GradientStop Color="#2D000000" Offset="1"/>
                         </RadialGradientBrush>
                     </Border.Background>
-                    <Border.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-17.044"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Border.RenderTransform>
-                    <Grid>
-                        <Grid.Effect>
-                            <DropShadowEffect/>
-                        </Grid.Effect>
-                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="HAKER:&#xA;" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="37.5,40.5,37.5,101.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="132" Height="47" FontFamily="HACKED" RenderTransformOrigin="0.5,0.5" Foreground="#FF00FF0C" IsHitTestVisible="True"/>
-                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Content="by BREND&#xA;" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Margin="10,74,10,43.145" HorizontalAlignment="Center" VerticalAlignment="Center" Height="71.855" Foreground="White" FontFamily="HACKED" Width="187" RenderTransformOrigin="0.5,0.5"/>
-                    </Grid>
-
                 </Border>
-
             </Grid>
         </Viewbox>
-        <Grid x:Name="grid4">
-            <MediaElement x:Name="mediaElement" Margin="0" Stretch="UniformToFill" Loaded="MediaElement_Loaded" Source="Resource/img/GameHaker 2018-10-25 14-21-02-731.mp4" SpeedRatio="1" MediaEnded="MediaElement_MediaEnded" UnloadedBehavior="Manual" LoadedBehavior="Manual">
-                <MediaElement.Effect>
-                    <BlurEffect Radius="100"/>
-                </MediaElement.Effect>
-            </MediaElement>
-            <Rectangle Fill="#02727070" Margin="0" Stroke="Black"/>
-        </Grid>
-        <Grid x:Name="grid2" Margin="0,-366,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Label Content="HAKER" HorizontalAlignment="Center" Height="261" Margin="0" VerticalAlignment="Top" Width="597" FontFamily="HACKED" FontSize="250" Foreground="White">
-                <Label.Effect>
-                    <DropShadowEffect BlurRadius="8" Direction="270" ShadowDepth="9"/>
-                </Label.Effect>
-            </Label>
-        </Grid>
-        <Border x:Name="border4" BorderBrush="White" BorderThickness="1" Margin="0" IsHitTestVisible="True" OpacityMask="#03000000">
-            <Border.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#00000000" Offset="0.721"/>
-                    <GradientStop Color="#2D000000" Offset="1"/>
-                </RadialGradientBrush>
-            </Border.Background>
-        </Border>
-        <Grid x:Name="_Foreground" Margin="0">
-
-            <Button x:Name="but" Content="Button" Click="Button_Click" Margin="147,51,1404,852" FontSize="24" Visibility="Hidden"/>
-            <StackPanel x:Name="stackPanel" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,261,0,0">
-                <StackPanel.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="-641"/>
-                    </TransformGroup>
-                </StackPanel.RenderTransform>
-                <local:MenuButtonsBackgroundBlur x:Name="startBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" MouseUp="MenuButtonsBackgroundBlur_MouseUp" Text="Start" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}"/>
-                <local:MenuButtonsBackgroundBlur x:Name="settingsBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" MouseUp="MenuButtonsBackgroundBlur_MouseUp_1" Text="Settings" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}"/>
-                <local:MenuButtonsBackgroundBlur x:Name="exitBut" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="623" Loaded="MenuButtonsBackgroundBlur_Loaded" Margin="0" TextColor="Red" RenderTransformOrigin="0.5,0.5" Text="Exit" Obj="{Binding ElementName=grid4, Mode=OneWay}" Window="{Binding ElementName=window, Mode=OneWay}" BlurOn="False" Panel.ZIndex="-1">
-                    <local:MenuButtonsBackgroundBlur.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform X="-20"/>
-                        </TransformGroup>
-                    </local:MenuButtonsBackgroundBlur.RenderTransform>
-                </local:MenuButtonsBackgroundBlur>
-
-            </StackPanel>
-            <ScrollViewer x:Name="startButInfo" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" RenderTransformOrigin="0.5,0.5" Loaded="loadButInfo" VerticalScrollBarVisibility="Auto">
-                <ScrollViewer.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform Y="1670"/>
-                    </TransformGroup>
-                </ScrollViewer.RenderTransform>
-                <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
-                    <WrapPanel.Effect>
-                        <DropShadowEffect BlurRadius="6"/>
-                    </WrapPanel.Effect>
-                    <Label Content="Start Button" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
-                    <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Span><Run Text="Кнопка для перехода в меню сохраннений" BaselineAlignment="Center"/></Span></TextBlock>
-                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="там вы можете выбрать 3 режима сложности"/><Run BaselineAlignment="Center" Text=":"/></TextBlock>
-                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="лёгкий, нормальный и сложный"/></TextBlock>
-                    <Image Height="252" Source="Resource/img/play-flat.png" Margin="160,3,160,0"/>
-                </WrapPanel>
-            </ScrollViewer>
-            <ScrollViewer x:Name="settingsButInfo" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" VerticalScrollBarVisibility="Auto" Opacity="0.93" RenderTransformOrigin="0.5,0.5" Loaded="loadButInfo">
-                <ScrollViewer.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform Y="880"/>
-                    </TransformGroup>
-                </ScrollViewer.RenderTransform>
-
-                <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
-                    <WrapPanel.Effect>
-                        <DropShadowEffect BlurRadius="6"/>
-                    </WrapPanel.Effect>
-                    <Label Content="Settings" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
-                    <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="Кнопка для перехода в меню "/><Run BaselineAlignment="Center" Text="настроек"/></TextBlock>
-                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="там вы можете "/><Run BaselineAlignment="Center" Text="настроеть такие параметры"/><Run BaselineAlignment="Center" Text=":"/></TextBlock>
-                    <TextBlock Margin="10,0,20,0" FontSize="36" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="отключение размытия под кнопками, отключение заднего фона и многое другое"/></TextBlock>
-                    <Image Height="252" Source="Resource/img/settings-flat.png" Margin="160,3,160,0"/>
-                </WrapPanel>
-            </ScrollViewer>
-            <ScrollViewer x:Name="settingsButExit" Margin="662,266,67,67" HorizontalScrollBarVisibility="Hidden" Background="#19FFFFFF" Foreground="Black" Focusable="False" IsHitTestVisible="False" Style="{DynamicResource LeftScrollViewer}" BorderBrush="White" VerticalScrollBarVisibility="Auto" Opacity="0.93" RenderTransformOrigin="0.5,0.5" Loaded="loadButInfo">
-                <ScrollViewer.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform Y="2457"/>
-                    </TransformGroup>
-                </ScrollViewer.RenderTransform>
-
-                <WrapPanel Orientation="Vertical" Margin="0" ItemWidth="{Binding ActualWidth, ElementName=startButInfo, Mode=OneWay}">
-                    <WrapPanel.Effect>
-                        <DropShadowEffect BlurRadius="6"/>
-                    </WrapPanel.Effect>
-                    <Label Content="Close button" Height="88" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="72" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1"/>
-                    <TextBlock Margin="10,0,20,0" FontSize="48" FontFamily="/GameHaker;component/Resource/#HACKED" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextWrapping="WrapWithOverflow" TextAlignment="Center"><Run BaselineAlignment="Center" Text="Кнопка для "/><Run BaselineAlignment="Center" Text="выхода из игры"/></TextBlock>
-                    <Image Height="252" Source="Resource/img/close-flat.png" Margin="160,3,160,0"/>
-                </WrapPanel>
-            </ScrollViewer>
-        </Grid>
-        <Grid Margin="0">
-            <Grid.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#7E000000" Offset="1"/>
-                    <GradientStop Color="#34808080"/>
-                </RadialGradientBrush>
-            </Grid.Background>
-            <Border BorderBrush="White" BorderThickness="1" Height="335" Margin="0" Width="550" Background="#7F000000" MinWidth="550" MinHeight="335" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid Margin="0">
-                    <local:ButFlat Margin="383,287.5,4,6" Text="Да" NormalColor="#6442FF53" HoverColor="#7F00FF2E" PressedColor="#8C208901" FontSizez="34"/>
-                    <local:ButFlat Margin="217,287.5,170,6" Text="нет" NormalColor="#64FF3535" HoverColor="#7EFF0000" PressedColor="#8C890101" FontSizez="34"/>
-                    <Path Data="M52.333333,201.5 L417,242.16667" Fill="White" Height="1" Margin="-1,0,-1,52" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" StrokeThickness="2">
-                        <Path.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Path.RenderTransform>
-                    </Path>
-                </Grid>
-            </Border>
-        </Grid>
     </Grid>
 </Window>

@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.Integration;
-using GameHaker.Resource.pages;
+using GameHaker.Resource.control;
+
+using GameHaker.Classes;
 
 namespace GameHaker
 {
@@ -34,22 +36,6 @@ namespace GameHaker
         {
             InitializeComponent();
             
-        }
-
-        private void PageChange(object obj, RoutedEventArgs e)
-        {
-            Button sender = obj as Button;
-            Page p;
-            switch (sender.Uid) {
-                default:
-                    p = new Page1();
-                    break;
-
-                case "Page2":
-                    p = new Page2();
-                    break;
-            }
-            FrameObj.Content = p;
         }
 
         public bool isDown = false;
@@ -85,15 +71,6 @@ namespace GameHaker
                 int func = (plus) ? 1 : -1;
                 return new Position(p1.left + p2.left * func, p1.right + p2.right * func, p1.top + p2.top * func, p1.bottom + p2.bottom * func);
             }
-        }
-
-        private void Button_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Control c = sender as Control;
-            Position oldPos = new Position((int)Mouse.GetPosition(this).X, 0, (int)Mouse.GetPosition(this).Y, 0);
-            this.oldPos = oldPos;
-            isDown = true;
-            pq.Content = "press";
         }
 
         private void Button_MouseUp(object sender, MouseButtonEventArgs e)
@@ -138,7 +115,7 @@ namespace GameHaker
         private void TaskPanelBlock_Loaded(object sender, RoutedEventArgs e)
         {
             //testblock.image.Fill = GetImageBrush("Resource/img/Pysk_hover.png");
-            testblock.image.Fill = GIB("DevelNextIco.png");
+            testblock.image.Fill = HF.GIB("DevelNextIco.png");
             testblock.notif.Fill = new SolidColorBrush(Color.FromArgb(100, 255, 255, 0));
 
             MenuPysk.notif.Fill = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
@@ -147,41 +124,53 @@ namespace GameHaker
 
 
 
-        private static ImageBrush GIB (string imgName)
-        {
-            return GetImageBrush(imgName);
-        }
 
-        private static ImageBrush GetImageBrush(string imgName)
-        {
-            ImageBrush imgBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/GameHaker;component/Resource/img/" + imgName, UriKind.Absolute))
-            };
-            return imgBrush;
-        }
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
             if (isLoadedEnd == true) WindowState = WindowState.Minimized;
             else isLoadedEnd = true;
 
-            trG.Children.Add(trT);
-            but.Margin = new Thickness(0, 0, 0, 0);
+
+        }
+        
+        private Button createBut(int x, int y)
+        {
+            Button but = new Button();
+            but.Content = x + " - " + y;
+
+            but.Width = 50;
+            but.Height = 30;
+            but.HorizontalAlignment = HorizontalAlignment.Left;
+            but.VerticalAlignment = VerticalAlignment.Top;
+
+            TransformGroup gr = new TransformGroup();
+            TranslateTransform tr = new TranslateTransform();
+            tr.X = x;
+            tr.Y = y;
+            gr.Children.Add(tr);
+            but.Click += delegate (object obj, RoutedEventArgs e)
+            {
+                HF.toFrontObj(but, MainPanel);
+            };
+            but.RenderTransform = gr;
+            return but;
         }
 
-        private void Rectangle_LayoutUpdated(object sender, EventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Button but;
+            for (int i = 0; i < 4; i++)
+            {
+                but = createBut(i * 10, i * 10);
+                MainPanel.Children.Add(but);
+            }
+        }
 
-            but.Width = -f.RenderTransform.Transform(new Point(0, 0)).X - 8 + l.RenderTransform.Transform(new Point(0, 0)).X;
-            but.Height = -f.RenderTransform.Transform(new Point(0, 0)).Y - 8 + l.RenderTransform.Transform(new Point(0, 0)).Y;
-
-            trT.X = f.RenderTransform.Transform(new Point(0, 0)).X + 8;
-            trT.Y = f.RenderTransform.Transform(new Point(0, 0)).Y + 8;
-
-            but.RenderTransform = trG;
-
-            pq.Content = f.RenderTransform.Transform(new Point(0, 0)).X;
+        private void AppForm_Loaded(object sender, RoutedEventArgs e)
+        {
+            AppForm s = sender as AppForm;
+            s.grid = MainPanel;
         }
     }
 
