@@ -78,7 +78,11 @@
     </ApplicationDefinition>
     <Compile Include="Classes\GameControl\GameControl.cs" />
     <Compile Include="Classes\GameControl\GameControlClasses\AppTaskBlock\DataAppTaskBlock.cs" />
+    <Compile Include="Classes\GameControl\GameControlClasses\GameApp\AppAPI.cs" />
+    <Compile Include="Classes\GameControl\GameControlClasses\GameApp\GameApp.cs" />
+    <Compile Include="Classes\GameControl\GameControlClasses\GameAppControl.cs" />
     <Compile Include="Classes\GameControl\GameControlClasses\GameTaskPanelControl.cs" />
+    <Compile Include="Classes\GameFile.cs" />
     <Compile Include="Classes\HelpFunctions.cs" />
     <Compile Include="Resource\control\AppForm.xaml.cs">
       <DependentUpon>AppForm.xaml</DependentUpon>
@@ -101,6 +105,7 @@
     <Compile Include="Resource\control\TaskPanelBlock.xaml.cs">
       <DependentUpon>TaskPanelBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resource\Test.cs" />
     <Page Include="Resource\control\AppForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

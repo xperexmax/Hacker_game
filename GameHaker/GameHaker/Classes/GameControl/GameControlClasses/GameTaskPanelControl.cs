@@ -7,8 +7,10 @@ using GameHaker.Classes.GameControl.GameControlClasses.AppTaskBlock;
 
 namespace GameHaker.Classes.GameControl.GameControlClasses
 {
-    class GameTaskPanelControl
+    static class GameTaskPanelControl
     {
-        public readonly List<DataAppTaskBlock> ListApp;
+        public readonly static List<DataAppTaskBlock> ListApp;
+
+         
     }
 }

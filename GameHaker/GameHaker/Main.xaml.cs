@@ -49,11 +49,9 @@ namespace GameHaker
 
         private void MenuButtonsBackgroundBlur_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            
-            foreach (MenuButtonsBackgroundBlur s in listBut)
-            {
-                s.OffBlur();
-            }
+            (new MainWindow()).Show();
+            this.Hide();
+            this.Close();
             
         }
 

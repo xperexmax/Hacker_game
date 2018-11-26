@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GameHaker.Resource.control"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="GameHaker.Resource.control.AppForm"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" PreviewMouseDown="UserControl_PreviewMouseDown">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" PreviewMouseDown="UserControl_PreviewMouseDown" GotFocus="UserControl_GotFocus" LostFocus="Window_LostFocus">
     <UserControl.Resources>
         <Storyboard x:Key="OnMouseEnter1">
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
@@ -22,6 +22,7 @@
                 <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF767676"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
+        <Color x:Key="WindowColorDeactive">#FF2D6E13</Color>
         <Storyboard x:Key="OnMouseLeave1">
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
                 <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#00F4F4F5"/>
@@ -95,84 +96,102 @@
                 <EasingColorKeyFrame KeyTime="0:0:0.3" Value="Black"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
+        <Color x:Key="WindowColorActive">#FF57D128</Color>
     </UserControl.Resources>
+    <UserControl.Effect>
+        <DropShadowEffect ShadowDepth="0" BlurRadius="34" Color="#FF939393" Opacity="0.79"/>
+    </UserControl.Effect>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="close">
-            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter1}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseEnter1_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter1}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="close">
-            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave1}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseLeave1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave1}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonDown" SourceName="close">
-            <BeginStoryboard x:Name="OnMouseLeftButtonDown1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeftButtonDown1}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseLeftButtonDown1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeftButtonDown1}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonUp" SourceName="close">
-            <BeginStoryboard x:Name="OnPreviewMouseLeftButtonUp1_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonUp1}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnPreviewMouseLeftButtonUp1_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonUp1}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="fullS">
-            <BeginStoryboard x:Name="OnMouseEnter2_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter2}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseEnter2_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter2}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="fullS">
-            <BeginStoryboard x:Name="OnMouseLeave2_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave2}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseLeave2_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave2}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonDown" SourceName="fullS">
-            <BeginStoryboard x:Name="OnPreviewMouseLeftButtonDown1_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonDown1}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnPreviewMouseLeftButtonDown1_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonDown1}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonUp" SourceName="fullS">
-            <BeginStoryboard x:Name="OnPreviewMouseLeftButtonUp1_BeginStoryboard1" Storyboard="{StaticResource OnPreviewMouseLeftButtonUp2}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnPreviewMouseLeftButtonUp1_BeginStoryboard1" Storyboard="{StaticResource OnPreviewMouseLeftButtonUp2}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="hide">
-            <BeginStoryboard x:Name="OnMouseEnter3_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter3}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseEnter3_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter3}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="hide">
-            <BeginStoryboard x:Name="OnMouseLeave3_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave3}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnMouseLeave3_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave3}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonDown" SourceName="hide">
-            <BeginStoryboard x:Name="OnPreviewMouseLeftButtonDown2_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonDown2}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnPreviewMouseLeftButtonDown2_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonDown2}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonUp" SourceName="hide">
-            <BeginStoryboard x:Name="OnPreviewMouseLeftButtonUp3_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonUp3}"/>
+            <BeginStoryboard x:FieldModifier="private" x:Name="OnPreviewMouseLeftButtonUp3_BeginStoryboard" Storyboard="{StaticResource OnPreviewMouseLeftButtonUp3}"/>
         </EventTrigger>
     </UserControl.Triggers>
     <i:Interaction.Behaviors>
-        <ei:MouseDragElementBehavior x:Name="drag" X="10" Y="10"/>
+        <ei:MouseDragElementBehavior x:FieldModifier="private" x:Name="drag" X="10" Y="10"/>
     </i:Interaction.Behaviors>
     <Grid>
-        <Border BorderBrush="#FF57D128" BorderThickness="2" Margin="0" Background="#FF57D128"/>
-        <ScrollViewer x:Name="content" Margin="2,28,2,2" Background="#FFD4D4D4" VerticalScrollBarVisibility="Disabled"/>
+        <Border x:FieldModifier="private" x:Name="Window" BorderThickness="2" Margin="0" Background="{Binding BorderBrush, RelativeSource={RelativeSource Self}}">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource WindowColorActive}"/>
+            </Border.BorderBrush>
+        </Border>
+        <ScrollViewer x:FieldModifier="private" x:Name="content" Margin="2,28,2,2" Background="#FFD4D4D4" VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <Frame x:FieldModifier="private" x:Name="Frame" Content="" NavigationUIVisibility="Hidden"/>
+        </ScrollViewer>
         <Grid Margin="2" VerticalAlignment="Top" Height="24" MinHeight="2">
             <StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Grid x:Name="hide" Margin="0" HorizontalAlignment="Right" Width="36" OpacityMask="Black" RenderTransformOrigin="0.5,0.5" Height="24">
-                    <Button x:Name="button2" Content="" Margin="0" Padding="1" Foreground="Black" BorderThickness="0" Opacity="0"/>
-                    <Rectangle x:Name="rectangle2" Fill="#00000000" Margin="0" Stroke="Black" StrokeMiterLimit="0" StrokeDashCap="Square" StrokeEndLineCap="Square" StrokeLineJoin="Bevel" StrokeStartLineCap="Square" StrokeThickness="0" IsHitTestVisible="False">
+                <Grid x:FieldModifier="private" x:Name="hide" Margin="0" HorizontalAlignment="Right" Width="36" OpacityMask="Black" RenderTransformOrigin="0.5,0.5" Height="24">
+                    <Button x:FieldModifier="private" x:Name="button2" Content="" Margin="0" Padding="1" Foreground="Black" BorderThickness="0" Opacity="0"/>
+                    <Rectangle x:FieldModifier="private" x:Name="rectangle2" Fill="#00000000" Margin="0" Stroke="Black" StrokeMiterLimit="0" StrokeDashCap="Square" StrokeEndLineCap="Square" StrokeLineJoin="Bevel" StrokeStartLineCap="Square" StrokeThickness="0" IsHitTestVisible="False">
                         <Rectangle.Effect>
                             <DropShadowEffect Color="#FF767676" ShadowDepth="2"/>
                         </Rectangle.Effect>
                     </Rectangle>
-                    <Label x:Name="label2" Content="&#xE108;" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" UseLayoutRounding="False" IsHitTestVisible="False" Foreground="White" FontFamily="tesrt brend" FontSize="11"/>
+                    <Label x:FieldModifier="private" x:Name="label2" Content="&#xE108;" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" UseLayoutRounding="False" IsHitTestVisible="False" Foreground="White" FontFamily="tesrt brend" FontSize="11"/>
                 </Grid>
-                <Grid x:Name="fullS" Margin="0" HorizontalAlignment="Right" Width="36" OpacityMask="Black" RenderTransformOrigin="0.5,0.5" Height="24">
-                    <Button x:Name="button1" Content="" Margin="0" Padding="1" Foreground="Black" BorderThickness="0" Opacity="0"/>
-                    <Rectangle x:Name="rectangle1" Fill="#00000000" Margin="0" Stroke="Black" StrokeMiterLimit="0" StrokeDashCap="Square" StrokeEndLineCap="Square" StrokeLineJoin="Bevel" StrokeStartLineCap="Square" StrokeThickness="0" IsHitTestVisible="False">
+                <Grid x:FieldModifier="private" x:Name="fullS" Margin="0" HorizontalAlignment="Right" Width="36" OpacityMask="Black" RenderTransformOrigin="0.5,0.5" Height="24">
+                    <Button x:FieldModifier="private" x:Name="button1" Content="" Margin="0" Padding="1" Foreground="Black" BorderThickness="0" Opacity="0"/>
+                    <Rectangle x:FieldModifier="private" x:Name="rectangle1" Fill="#00000000" Margin="0" Stroke="Black" StrokeMiterLimit="0" StrokeDashCap="Square" StrokeEndLineCap="Square" StrokeLineJoin="Bevel" StrokeStartLineCap="Square" StrokeThickness="0" IsHitTestVisible="False">
                         <Rectangle.Effect>
                             <DropShadowEffect Color="#FF767676" ShadowDepth="2"/>
                         </Rectangle.Effect>
                     </Rectangle>
-                    <Label x:Name="label1" Content="&#xE003;" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" UseLayoutRounding="False" IsHitTestVisible="False" Foreground="White" FontFamily="tesrt brend" FontSize="11"/>
+                    <Label x:FieldModifier="private" x:Name="label1" Content="&#xE003;" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" UseLayoutRounding="False" IsHitTestVisible="False" Foreground="White" FontFamily="tesrt brend" FontSize="11"/>
                 </Grid>
-                <Grid x:Name="close" Margin="0" HorizontalAlignment="Right" Width="36" OpacityMask="Black" Height="24">
-                    <Button x:Name="button" Content="" Margin="0" Padding="1" Foreground="Black" BorderThickness="0" Opacity="0"/>
-                    <Rectangle x:Name="rectangle" Fill="#00000000" Margin="0" Stroke="Black" StrokeMiterLimit="0" StrokeDashCap="Square" StrokeEndLineCap="Square" StrokeLineJoin="Bevel" StrokeStartLineCap="Square" StrokeThickness="0" IsHitTestVisible="False">
+                <Grid x:FieldModifier="private" x:Name="close" Margin="0" HorizontalAlignment="Right" Width="36" OpacityMask="Black" Height="24">
+                    <Button x:FieldModifier="private" x:Name="button" Content="" Margin="0" Padding="1" Foreground="Black" BorderThickness="0" Opacity="0"/>
+                    <Rectangle x:FieldModifier="private" x:Name="rectangle" Fill="#00000000" Margin="0" Stroke="Black" StrokeMiterLimit="0" StrokeDashCap="Square" StrokeEndLineCap="Square" StrokeLineJoin="Bevel" StrokeStartLineCap="Square" StrokeThickness="0" IsHitTestVisible="False">
                         <Rectangle.Effect>
                             <DropShadowEffect Color="#FF767676" ShadowDepth="2"/>
                         </Rectangle.Effect>
                     </Rectangle>
-                    <Label x:Name="label" Content="Í" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,2,0,0" UseLayoutRounding="False" IsHitTestVisible="False" Foreground="White" FontFamily="Wingdings 2" FontSize="16"/>
+                    <Label x:FieldModifier="private" x:Name="label" Content="Í" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,2,0,0" UseLayoutRounding="False" IsHitTestVisible="False" Foreground="White" FontFamily="Wingdings 2" FontSize="16"/>
                 </Grid>
             </StackPanel>
-            <Label x:Name="Title" Content="Label" Margin="0,0,121.667,0" Padding="10,0,5,0" VerticalContentAlignment="Center"/>
+            <Label x:FieldModifier="private" x:Name="Title" Content="Label" Margin="0,0,121.667,0" Padding="10,0,5,0" VerticalContentAlignment="Center"/>
         </Grid>
-        <Button x:Name="bu" Content="Button" HorizontalAlignment="Right" Height="2" Margin="0" VerticalAlignment="Bottom" Width="2" Opacity="0" PreviewMouseLeftButtonDown="Button_MouseLeftButtonDown" Uid="5" PreviewMouseLeftButtonUp="bu_PreviewMouseLeftButtonUp" Cursor="SizeNWSE"/>
+        <Button x:FieldModifier="private" x:Name="foc" Content="Button" Margin="0,0,121.667,0" Opacity="0" VerticalAlignment="Top" Height="28"/>
+        <Button x:FieldModifier="private" x:Name="r1" Content="Button" HorizontalAlignment="Left" Height="3" Margin="-1,-1,0,0" VerticalAlignment="Top" Width="3" Opacity="0" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="1" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeNWSE"/>
+        <Button x:FieldModifier="private" x:Name="r2" Content="Button" Height="3" Margin="2,-1,2,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="2" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeNS" Opacity="0"/>
+        <Button x:FieldModifier="private" x:Name="r3" Content="Button" HorizontalAlignment="Right" Height="3" Margin="0,-1,-1,0" VerticalAlignment="Top" Width="3" Opacity="0" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="3" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeNESW"/>
+        <Button x:FieldModifier="private" x:Name="r4" Content="Button" HorizontalAlignment="Right" Margin="0,2,-1,2" Width="3" Opacity="0" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="4" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeWE"/>
+        <Button x:FieldModifier="private" x:Name="r5" Content="Button" HorizontalAlignment="Right" Height="3" Margin="0,0,-1,-1" VerticalAlignment="Bottom" Width="3" Opacity="0" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="5" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeNWSE"/>
+        <Button x:FieldModifier="private" x:Name="r6" Content="Button" Height="3" Margin="2,0,2,-1" VerticalAlignment="Bottom" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="6" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeNS" Opacity="0"/>
+        <Button x:FieldModifier="private" x:Name="r7" Content="Button" Height="3" Margin="-1,0,0,-1" VerticalAlignment="Bottom" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="7" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeNESW" Opacity="0" HorizontalAlignment="Left" Width="3"/>
+        <Button x:FieldModifier="private" x:Name="r8" Content="Button" Margin="-1,2,0,2" PreviewMouseLeftButtonDown="r_MouseLeftButtonDown" Uid="8" PreviewMouseLeftButtonUp="r_PreviewMouseLeftButtonUp" Cursor="SizeWE" Opacity="0" HorizontalAlignment="Left" Width="3"/>
 
     </Grid>
 </UserControl>

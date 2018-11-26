@@ -65,7 +65,7 @@
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="grid">
-            <BeginStoryboard x:Name="OnLoaded1_BeginStoryboard" Storyboard="{StaticResource OnLoaded1}"/>
+            <BeginStoryboard x:Name="OnLoaded1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave1}"/>
         </EventTrigger>
     </Window.Triggers>
     <Grid x:Name="grid" Background="#FF1E4F20">
@@ -76,7 +76,10 @@
         </Image>
         <Button x:Name="test" Content="Button" HorizontalAlignment="Left" Margin="432,102,0,0" VerticalAlignment="Top" Width="75" MouseMove="Button_MouseMove" Height="20" MouseUp="Button_MouseUp" Click="test_Click"/>
         <Grid x:Name="MainPanel" Margin="0">
-            <control:AppForm HorizontalAlignment="Left" Height="147" Margin="159,75,0,0" VerticalAlignment="Top" Width="329" Loaded="AppForm_Loaded"/>
+            <control:AppForm HorizontalAlignment="Left" Height="147" Margin="10,0,0,0" VerticalAlignment="Top" Width="390" Loaded="AppForm_Loaded" RenderTransformOrigin="0.5,0.5"/>
+            <control:AppForm x:Name="form" HorizontalAlignment="Left" Height="132" Margin="304,78,0,0" VerticalAlignment="Top" Width="270" Loaded="AppForm_Loaded" RenderTransformOrigin="0.5,0.5"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="38" Margin="574,232,0,0" VerticalAlignment="Top" Width="72" Click="Button_Click"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="38" Margin="409,258,0,0" VerticalAlignment="Top" Width="72" Click="Button_Click1"/>
         </Grid>
         <Grid x:Name="TaskPanel" Background="#6631E61F" VerticalAlignment="Bottom" Height="40">
             <StackPanel x:Name="TaskPanelContent" Margin="40,0,0,0" Orientation="Horizontal">

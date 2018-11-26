@@ -128,8 +128,8 @@ namespace GameHaker
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
-            if (isLoadedEnd == true) WindowState = WindowState.Minimized;
-            else isLoadedEnd = true;
+            //if (isLoadedEnd == true) WindowState = WindowState.Minimized;
+            //else isLoadedEnd = true;
 
 
         }
@@ -171,6 +171,19 @@ namespace GameHaker
         {
             AppForm s = sender as AppForm;
             s.grid = MainPanel;
+        }
+
+        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            this.form.loadContent(new FormContent(this.form, new Resource.pages.Page1()));
+            
+        }
+
+        private void Button_Click1(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 
